@@ -1,0 +1,50 @@
+Setup for HTTPS Users Using Git Credentials
+Git with AWS CodeCommit Tutorial
+Regions and Git Connection Endpoints for AWS CodeCommit
+Limits in AWS CodeCommit
+Get Temporary Access Credentials
+Environment Variables in Build Environments 
+How to store source artifact
+How to store build artifact
+Push artifact to jfrog repository
+
+
+
+*************************************************
+
+
+
+https://aws.amazon.com/blogs/devops/integrating-jfrog-artifactory-with-aws-codepipeline/
+
+
+Justin - AWS code build success
+
+version: 0.2
+
+env:
+  variables:
+      CODEBUILD_SOURCE_REPO_URL: 
+      CODEBUILD_SRC_DIR: "
+      
+phases:
+  install:
+    commands:
+      - echo nothing in install phase
+     
+  pre_build:
+    commands:
+      - echo nothing in pre_build phase
+      - find / -iname 'pom.xml'
+  build:
+    commands:
+      - echo build started on `date`
+      - mvn clean
+      - mvn install
+  post_build:
+    commands:
+      - echo completed on `date` 
+ 
+***************************************************
+
+
+Create AWS CodeDeploy Resources to Deploy the Sample Application
