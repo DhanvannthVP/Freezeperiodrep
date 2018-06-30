@@ -1,0 +1,42 @@
+1.create maven project
+
+https://stackoverflow.com/questions/25683649/deploy-war-from-s3-to-aws-elastic-beanstalk
+
+Deploy war from S3 to AWS Elastic Beanstalk - https://stackoverflow.com/questions/25683649/deploy-war-from-s3-to-aws-elastic-beanstalk
+
+https://cloudacademy.com/blog/how-to-deploy-application-code-from-s3-using-aws-codedeploy/
+
+How to deploy application code from S3 using AWS CodeDeploy
+
+How to deploy from s3 with aws code deploy?
+*********************************************
+
+https://cloudacademy.com/blog/how-to-deploy-application-code-from-s3-using-aws-codedeploy/
+
+
+Build Specification Reference for AWS CodeBuild
+************************************************
+
+https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html dlauto
+
+Codedeploy
+BlueGreenDemoFleet deploy group
+
+BlueGreenLoadBalancer-nx7xn1n load balance	
+
+CodeDeployBGStack-nx7xn1n-BlueGreenAutoScalingGroup-8ZWI5XNESZFV autoscaling
+
+appplication visible
+
+***************************************
+codedeploy needs 
+
+Autoscaling group
+
+
+Load balancer
+
+_______________
+
+
+
