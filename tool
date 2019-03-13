@@ -1,0 +1,159 @@
+
+#Java-maven-Git-Tomcat-Jenkins Configuration
+
+#login to root
+echo login to root
+sudo -i
+
+#install wget downloaded.
+echo install wget downloaded.
+sudo yum install wget -y
+
+#===========================JAVA INSTALLATION START==========================================
+
+#JAVA Setup
+echo JAVA Setup
+#download JDK rpm
+echo download JDK rpm
+wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm
+
+#Install RPM
+echo Install RPM
+sudo rpm -i jdk-8u131-linux-x64.rpm
+
+#Setup Maven
+export JAVA_HOME=/usr/java/jdk1.8.0_131
+export PATH=$JAVA_HOME/bin:$PATH
+#Check java
+echo Check the java version
+java -version
+
+#Java Home path: /usr/java/jdk1.8.0_131
+echo Java Home path: /usr/java/jdk1.8.0_131
+
+#===========================JAVA INSTALLATION END=========================================
+
+#===========================MAVEN SETUP START========================================================
+
+#Maven Setup:
+echo Maven Setup:
+#Download maven:
+echo Download maven:
+sudo wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+#Unzip tar file
+echo Unzip tar file
+sudo tar zxpvf apache-maven-3.5.4-bin.tar.gz
+echo maven home: /root/apache-maven-3.5.4
+#Setup Maven
+export MAVEN_HOME=/root/apache-maven-3.5.4
+export M3=$MAVEN_HOME/bin
+export PATH=$M3:$PATH
+#check maven: mvn -v
+echo check maven: mvn -v
+mvn -v
+
+#vi /root/apache-maven-3.5.4/conf/settings.xml: update this settings file with below nexus credentials.
+echo'
+	<server>
+		<id>deployment</id>
+		<username>deployment</username>
+		<password>deployment123</password>
+	</server>
+'
+
+#===========================MAVEN SETUP END========================================================
+
+#===========================TOMCAT SETUP START========================================================
+
+#Tomcat Setup:
+echo Tomcat Setup:
+#Download Tomcat
+echo Download Tomcat
+wget http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+#Unzip tar file
+echo Unzip tar file
+tar zxpvf apache-tomcat-8.5.35.tar.gz
+
+#Move to folder
+echo Move to folder
+mv apache-tomcat-8.5.35 tomcat8
+
+#Update tomcat-users.xml file: vi tomcat8/conf/tomcat-users.xml
+echo'
+<role rolename="manager-gui"/>
+<user username="tomcat" password="s3cret" roles="manager-gui"/>
+'
+
+#Check whether its updated properly or not: cat tomcat8/conf/tomcat-users.xml
+
+#Startup the server: ./tomcat8/bin/startup.sh
+#Shutdown the server: ./tomcat8/bin/shutdown.sh
+
+#Startup the tomcat server and then launch the URL in any browser: http://<PublicIP>:8080
+
+#===========================TOMCAT SETUP END=================================================
+
+
+#===========================JENKINS SETUP START=================================================
+
+#Jenkins Setup:
+echo Jenkins Setup:
+
+#Download Jenkins
+echo Download Jenkins
+wget https://updates.jenkins-ci.org/download/war/2.140/jenkins.war
+
+#Deploy war to tomcat
+echo Deploy war to tomcat
+mv jenkins.war tomcat8/webapps/
+
+#Restart the server if required.
+#/root/tomcat8/bin/shutdown.sh
+#/root/tomcat8/bin/startup.sh
+***************************************************************************************************
+#launch the tomcat URL and start jenkins.
+#Access the URL: http://publicIP:8080/ in browser
+
+#Login to "Manager webapp" -->	 click on "jenkins" --> http://18.218.88.137:8088/jenkins/
+
+#While Jenkins is starting up, it will ask you to enter pwd from the below location.
+
+#Run the command: cat /root/.jenkins/secrets/initialAdminPassword
+
+#Copy the pwd and paste it on jenkins.
+
+#Install plugins (first option)
+
+#Uname/pwd/email setup OR continue as admin. Recommend to signup & continue as user.
+
+#Manage Jenkins --> Global Tool Configuration 
+
+#--> Add JDK home path : 
+#		Name: jdk1.8.0_131
+#		Path: /usr/java/jdk1.8.0_131
+#--> Add Git home path :  
+#		Name: GitExePath
+#		Path: /usr/bin/git
+#--> Add Mvn home path :  
+#		Name: maven-3.5.4
+#		Path: /root/apache-maven-3.5.4
+
+
+#===========================JENKINS SETUP 
+#===========================GIT INSTALLATION 
+
+#Git Setup:
+echo Git Setup:
+#Git Installation
+echo Git Installation
+sudo yum install git -y
+
+#GitHome: /usr/bin/git  (sudo find  /  -name "git" -- to search with command)
+echo GitHome: /usr/bin/git  (sudo find  /  -name "git" -- to search with command)
+
+#Git Version
+echo Git Version
+git --version
+java -version
+mvn -v
+#===========================GIT INSTALLATION END======================
